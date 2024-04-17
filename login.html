@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+.header {
+  width: 80%;
+  background-color: white;
+  color: black;
+  padding: 40px;
+  font-size: 1.25vw;
+  margin: 0 10%;
+}
+
+label {
+  display: block;
+  pading 10px;
+  font-size: 1.25vw;
+  color: black;;
+}
+
+.login-container {
+  width: 35%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  position: absolute;
+  top: 15%;
+  left: 45%;
+  transform: translateX(-35%);
+}
+img {
+  width: 40%; /* Adjust the width as needed */
+  position: absolute;
+  top: 5%;
+  left: 46%;
+  transform: translateX(-40%);
+  /*height: auto; /* Maintain aspect ratio */
+  /*margin-left: 100px;*/
+}
+/*.login-container h2 {
+  /*text-align: center;
+  margin-bottom: 20px;
+}*/
+
+.login-container input[type="text"],
+.login-container input[type="password"]{
+  font-size: 1.25vw;
+  width: 100%;
+  padding: 15px;
+  margin: 0 1%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  /*box-sizing: border-box;*/
+}
+.login-container input[type="submit"] {
+  font-size: 1.25vw;
+  width: 60%;
+  padding: 15px 5px;
+  margin: 0 15%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.login-container input[type="submit"] {
+  background-color: #009f00;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login-container input[type="submit"]:hover {
+  background-color: green; 
+}
+.footer {
+  background-color: #ffffff;
+  color: #111111;
+  text-align: center;
+  font-size: 1vw;
+  padding: 10px;
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 1px solid #BBBBBB;
+}
+
+@media only screen and (max-width: 750px) {
+  /* For mobile phones: */
+  .login-container {
+    width: 40%;
+    transform: translate(-40%, -10%);
+  }
+}
+</style>
+</head>
+<body style="font-family:Verdana;color:#aaaaaa;">
+<div class="w3-main" style="display: flex; justify-content: center; margin-top: 20px;">
+
+ <div class="w3-container">
+
+   <div class="login-container">
+      <img src='https://wiki.amberg.deprag.de/allgemein/images/thumb/d/de/Logo-DEPRAG-machinesunlimited.svg/120px-Logo-DEPRAG-machinesunlimited.svg.png' id='deprag-logo'>
+      
+      <div class="header" style="margin-top: 45px;">
+        <h>Willkommen in Toolbox4</h>
+        <form method="post" id="loginForm" action="/index">
+          <label for="username" style="margin-top: 35px;">Benutzername</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password" style="margin-top: 25px;">Passwort</label>
+          <input type="password" id="password" name="password" required>
+          <input type="submit" style="margin-top: 25px; text-align: center;" value="Anmeldung">
+        </form>
+     </div>
+   </div>
+  </div>
+</div> 
+
+<div class="footer">
+  <p>&copy; 2024 - DEPRAG SCHULZ GMBH u. CO.</p>
+  <span>Softwareversion - 2024.06</span>
+</div>
+
+
+<script src="app.js=></script>
+
+<script>
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const password = document.getElementById('password').value;
+      const username = document.getElementById('username').value;
+      var formData = new FormData();
+      formData.append("username", document.getElementById('username').value);
+      formData.append("password", document.getElementById('password').value);
+      
+      fetch('/login', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+            //var url = '/login?username=' + username + 'password=' + password;
+            //window.location.href = url;
+            console.log('response from server is ok');
+            window.location.href = '/index';
+        } else {
+            //alert("Wrong Password");
+            return response.text();
+        };
+      })
+      .then(errorMessage=> {
+        if(errorMessage){
+          alert(errorMessage);
+        }
+      })
+      .catch(error =>{
+       console.error('Error: ', error);
+      });
+    });
+</script>
+
+</body>
+</html>
+

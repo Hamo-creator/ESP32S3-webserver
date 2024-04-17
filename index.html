@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+  border-bottom: 1px solid #BBBBBB;
+}
+.navbar a {
+  float: left;
+  font-size: 1.25vw;
+  color: black;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+}
+.dropdown {
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 1.25vw;;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 12%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content a:hover {
+  background-color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: blue;
+}
+.collapsible {
+  background-color: #fff;
+  color: black;
+  cursor: pointer;
+  padding: 15px;
+  width: 60%;
+  border: none;
+  border-radius: 5px;
+  text-align: left;
+  outline: none;
+  font-size: 1vw;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.active, .collapsible:hover {
+  background-color: #2A2;
+}
+
+.collapsible:after {
+  content: '\25BC';
+  color: #222;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 10px 0 10px;
+  font-size: 1vw;
+  max-height: 0;
+  width: 85%;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #fff;
+  color: black;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1vw;
+  padding: 8px;
+  width: 60%;
+  position: absolute;
+  top: 17%;
+  left: 48%;
+  transform: translateX(-27%);
+}
+.button {
+  background-color: #ffffff;
+  border: none;
+  color: blue;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1vw;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #ffffff;
+  color: #1F3D99;
+}
+.footer {
+  background-color: #ffffff;
+  color: #111111;
+  text-align: center;
+  font-size: 1vw;
+  padding: 10px;
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 1px solid #BBBBBB;
+}
+
+@media only screen and (max-width: 450px) {
+  /* For mobile phones: */
+  .navbar{
+    width: 30%;
+  }
+}
+</style>
+</head>
+<body style="font-family:Verdana;color:#aaaaaa;">
+<div class="w3-main" style="display: flex; justify-content: center; margin-top: 20px;">
+
+ <div class="w3-container">
+
+  <div class="navbar">
+   <img src='https://wiki.amberg.deprag.de/allgemein/images/thumb/d/de/Logo-DEPRAG-machinesunlimited.svg/120px-Logo-DEPRAG-machinesunlimited.svg.png' style='margin-right: 20px; float: left;'  id='deprag-logo' width= '12%'>
+     <a href="index">Dashboard</a>
+     <a href="aktualisiere">Software</a>
+     <a href="network">Einstellungen</a>
+     <a href="sysinfo">Systeminfo</a>
+     <a href="sensordata">Service</a>
+     <div class="dropdown">
+      <button class="dropbtn"><i class="fa fa-fw fa-user"></i>Admin<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+       <a class="fa fa-user" href="meinprofil">Mein Profil</a>
+       <a class="fa fa-times "href="#" onclick="logout()">Abmelden</a>
+      </div>
+     </div> 
+  </div>
+  
+  <div class="container">
+
+   <button class="collapsible">Toolboxdaten</button>
+    <div class="content">
+     <table id="myTable">
+      <tr><th>Titel</th><th>Wert</th></tr>
+      <tr><td>Toolboxtyp</td><td>Toolbox4</td></tr>
+      <tr><td>Seriennummer</td><td>0123456</td></tr>
+      <tr><td>Version Software</td><td>2024.04</td></tr>
+     </table>
+     <a href="sysinfo" class="button">Mehr anzeigen</a>
+    </div>
+
+    <div style="margin-top: 2%;"></div>
+    <button class="collapsible">Netzwerkdaten</button>
+    <div class="content">
+     <table id="myTable">
+      <tr><th>Titel</th><th>Wert</th></tr>
+      <tr><td>IP-Address</td><td>10.10.225.150</td></tr>
+      <tr><td>Fieldbusmodul</td><td>EtherCAT</td></tr>
+     </table>
+     <a href="network" class="button">Mehr anzeigen</a>
+   </div>
+
+   <div style="margin-top: 2%;"></div>
+   <button class="collapsible">Service</button>
+   <div class="content">
+     <a class="fa fa-phone" href="tel:+49 9621 / 371 - 371"> +49 9621 / 371 - 371 </a><br>
+     <a class="fa fa-envelope" href="mailto:service@deprag.de"> service@deprag.de </a><br>
+   </div>
+ </div>
+  
+ </div>
+</div> 
+
+<div class="footer">
+  <p>&copy; 2024 - DEPRAG SCHULZ GMBH u. CO.</p>
+  <span>Softwareversion - 2024.06</span>
+</div>
+
+<script src="app.js=></script>
+
+<script>
+
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } 
+    });
+  }
+
+  function logout() {
+    // Perform any necessary logout actions here
+    // For example, clearing session storage or cookies
+    localStorage.removeItem('authToken'); // Remove authentication token
+    setTimeout(function(){ window.open("/login", "_self");}, 0);
+    window.sessionStorage.clear();
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/logout", true);
+    xhr.send();
+  }
+</script>
+
+</body>
+</html>
+
