@@ -3,6 +3,7 @@
 #include <Arduino_JSON.h>
 #include <cjson/cJSON.h>
 #include "LittleFS.h"
+#include <Preferences.h>
 #include <string>
 #include <stdint.h>
 
