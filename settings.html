@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+.header {
+  width: 80%;
+  background-color: white;
+  color: black;
+  padding: 28px;
+  font-size: 1.25vw;
+  margin: 2% 26%;
+}
+.navbar {
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+  border-bottom: 1px solid #BBBBBB;
+}
+.navbar a {
+  float: left;
+  font-size: 1.25vw;
+  color: black;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+}
+.dropdown {
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 1.25vw;;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 12%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content a:hover {
+  background-color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: blue;
+}
+.sidenav {
+  width: 23%;
+  float: left;
+  border-right: 1px solid #BBBBBB;
+}
+
+.sidenav a {
+  background-color: white;
+  padding: 8px;
+  margin-top: 7px;
+  font-size: 1.25vw;
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #BBBBBB;
+}
+.sidenav a:hover {
+  color: blue;
+}
+label {
+  display: block;
+  pading 10px;
+  font-size: 1.25vw;
+  color: black;;
+}
+
+.footer {
+  background-color: #ffffff;
+  color: #111111;
+  text-align: center;
+  font-size: 1vw;
+  padding: 10px;
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 1px solid #BBBBBB;
+}
+
+@media only screen and (max-width: 450px) {
+  /* For mobile phones: */
+  .navbar, .sidenav {
+    width: 30%;
+  }
+}
+</style>
+</head>
+<body style="font-family:Verdana;color:#aaaaaa;">
+<div class="w3-main" style="display: flex; justify-content: center; margin-top: 20px;">
+
+ <div class="w3-container">
+  <div class="navbar">
+   <img src='https://wiki.amberg.deprag.de/allgemein/images/thumb/d/de/Logo-DEPRAG-machinesunlimited.svg/120px-Logo-DEPRAG-machinesunlimited.svg.png' style='margin-right: 20px; float: left;'  id='deprag-logo' width= '12%'>
+     <a href="index">Dashboard</a>
+     <a href="aktualisiere">Software</a>
+     <a href="network">Einstellungen</a>
+     <a href="sysinfo">Systeminfo</a>
+     <a href="sensordata">Service</a>
+     <div class="dropdown">
+       <button class="dropbtn"><i class="fa fa-fw fa-user"></i>Admin<i class="fa fa-caret-down"></i></button>
+       <div class="dropdown-content">
+         <a class="fa fa-user" href="meinprofil">Mein Profil</a>
+         <a class="fa fa-times "href="#" onclick="logout()">Abmelden</a>
+       </div>
+     </div> 
+  </div>
+  
+  <div class="sidenav">
+    <a href="network">Netzwerk</a>
+    <a href="user">Benutzerverwaltung</a>
+    <a href="feldbus">Feldbus</a>
+  </div>
+
+ </div>
+</div> 
+
+<div class="footer">
+  <p>&copy; 2024 - DEPRAG SCHULZ GMBH u. CO.</p>
+  <span>Softwareversion - 2024.06</span>
+</div>
+
+<script>
+  function logout() {
+    // Perform any necessary logout actions here
+    // For example, clearing session storage or cookies
+    localStorage.removeItem('authToken'); // Remove authentication token
+    setTimeout(function(){ window.open("/login", "_self");}, 0);
+    window.sessionStorage.clear();
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/logout", true);
+    xhr.send();
+  }
+</script>
+
+</body>
+</html>
+

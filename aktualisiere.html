@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  width: 100%;
+  overflow: hidden;
+  background-color: white;
+  border-bottom: 1px solid #BBBBBB;
+}
+.navbar a {
+  float: left;
+  font-size: 1.25vw;
+  color: black;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+}
+.dropdown {
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 1.25vw;;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  width: 12%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.dropdown-content a:hover {
+  background-color: white;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  color: blue;
+}
+
+.sidenav {
+  width: 23%;
+  float: left;
+  border-right: 1px solid #BBBBBB;
+}
+
+.sidenav a {
+  background-color: white;
+  padding: 8px;
+  margin-top: 7px;
+  font-size: 1.25vw;
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #BBBBBB;
+}
+.sidenav a:hover {
+  color: blue;
+}
+
+label {
+  padding: 8px 8px 8px 8px;
+  display: inline-block;
+}
+.container {
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1vw;
+  padding: 10px;
+  width: 50%;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-34%);
+}
+
+input[type=file] {
+  background-color: white;
+  font-size: 1vw;
+  width: 80%;
+  margin: 0 -2%;
+  padding: 22px 20px;
+}
+
+input[type=submit] {
+  background-color: green; 
+  font-size: 1vw;
+  padding: 10px;
+  border: none;
+  width: 15%;
+  margin: 0 14%;
+}
+
+
+input[type=submit]:hover {
+  background-color: #45a049; 
+}
+
+input[type=reset] {
+  background-color: #ff0000;
+  font-size: 1vw;
+  padding: 10px 10px 10px 10px; 
+  border: none;
+  width: 15%;
+  margin: 0 -5%;
+}
+
+input[type=reset]:hover {
+  background-color: #ee4466; 
+}
+.footer {
+  background-color: #ffffff;
+  color: #111111;
+  text-align: center;
+  font-size: 1vw;
+  padding: 10px;
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 1px solid #BBBBBB;
+}
+
+@media only screen and (max-width: 450px) {
+  /* For mobile phones: */
+  .navbar, .sidenav{
+    width: 30%;
+  }
+}
+</style>
+</head>
+<body style="font-family:Verdana;color:#aaaaaa;">
+<div class="w3-main" style="display: flex; justify-content: center; margin-top: 20px;">
+
+ <div class="w3-container">
+
+  <div class="navbar">
+   <img src='https://wiki.amberg.deprag.de/allgemein/images/thumb/d/de/Logo-DEPRAG-machinesunlimited.svg/120px-Logo-DEPRAG-machinesunlimited.svg.png' style='margin-right: 20px; float: left;'  id='deprag-logo' width= '12%'>
+     <a href="index">Dashboard</a>
+     <a href="aktualisiere">Software</a>
+     <a href="network">Einstellungen</a>
+     <a href="sysinfo">Systeminfo</a>
+     <a href="sensordata">Service</a>
+     <div class="dropdown">
+      <button class="dropbtn"><i class="fa fa-fw fa-user"></i>Admin<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+       <a class="fa fa-user" href="meinprofil">Mein Profil</a>
+       <a class="fa fa-times "href="#" onclick="logout()">Abmelden</a>
+      </div>
+     </div> 
+  </div>
+<div class="sidenav">
+  <a href="aktualisiere">Aktualisierung</a>
+</div>
+  
+  <div class="container">
+    <form method="post" action= "/update" enctype="multipart/form-data">
+
+      <div class="w3-light-grey" style="width: 67%">
+        <div id="myBar" class="w3-container w3-green w3-center" style="width:0%">0%</div>
+      </div>
+      <label for="fname">Firmware File:</label>
+
+      <input type="file" name="update"><br><br>
+
+      <input type="submit" value="Update" onclick="move()">
+      <input type="reset" value="Reset">
+
+    </form>
+  </div>
+  
+ </div>
+</div> 
+
+<div class="footer">
+  <p>&copy; 2024 - DEPRAG SCHULZ GMBH u. CO.</p>
+  <span>Softwareversion - 2024.06</span>
+</div>
+
+<script>
+
+  function move() {
+    var elem = document.getElementById("myBar");   
+    var width = 1;
+    var id = setInterval(frame, 1235);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width++; 
+        elem.style.width = width + '%'; 
+        elem.innerHTML = width * 1  + '%';
+      }
+    }
+  }
+
+  function logout() {
+    // Perform any necessary logout actions here
+    // For example, clearing session storage or cookies
+    localStorage.removeItem('authToken'); // Remove authentication token
+    setTimeout(function(){ window.open("/login", "_self");}, 0);
+    window.sessionStorage.clear();
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/logout", true);
+    xhr.send();
+  }
+</script>
+
+</body>
+</html>
+
